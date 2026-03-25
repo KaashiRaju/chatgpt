@@ -1,64 +1,15 @@
 package com.dao;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.entities.Bug;
-import com.entities.Project;
 import com.exception.InvalidProjectException;
 import com.exception.InvalidBugException;
-import com.repository.ProjectRepository;
-import com.repository.BugRepository;
 
-@Component
-public class BugDAOImpl implements IBugDAO {
-
-    private final BugRepository bugRepository;
-    private final ProjectRepository projectRepository;
-
-    // Use Constructor Injection (Recommended by Spring & PMD)
-    @Autowired
-    public BugDAOImpl(BugRepository bugRepository, ProjectRepository projectRepository) {
-        this.bugRepository = bugRepository;
-        this.projectRepository = projectRepository;
-    }
-
-    @Override
-    public Bug addBug(Bug bug, int projectId) throws InvalidProjectException {
-        // Check if the project exists before associating the bug
-        return projectRepository.findById(projectId).map(project -> {
-            bug.setProject(project); // Assuming Bug entity has a setProject method
-            return bugRepository.save(bug);
-        }).orElseThrow(() -> new InvalidProjectException("Project with ID " + projectId + " not found"));
-    }
-
-    @Override
-    public Bug updateBugStatus(int bugId, String status) throws InvalidBugException {
-        Bug existingBug = bugRepository.findById(bugId)
-                .orElseThrow(() -> new InvalidBugException("Bug with ID " + bugId + " not found"));
-        
-        existingBug.setBugStatus(status); // Assuming the field is bugStatus
-        return bugRepository.save(existingBug);
-    }
-
-    @Override
-    public List<Bug> viewBugsByBugType(String bugType) {
-        // This assumes you have a findByBugType method in BugRepository
-        return bugRepository.findByBugType(bugType);
-    }
-
-    @Override
-    public List<Bug> viewBugsByProjectName(String projectName) {
-        // This assumes you have a findByProjectProjectName method in BugRepository
-        return bugRepository.findByProjectProjectName(projectName);
-    }
-
-    @Override
-    public List<Bug> viewBugsBySeverity(int severity) {
-        // This assumes you have a findBySeverity method in BugRepository
-        return bugRepository.findBySeverity(severity);
-    }
+public interface IBugDAO {
+	public Bug addBug(Bug bug,int projectId) throws InvalidProjectException;
+	public Bug updateBugStatus(int bugId,String status) throws InvalidBugException;
+	public List<Bug> viewBugsByBugType(String bugType);
+	public List<Bug> viewBugsBySeverity(int severity);
+	public List<Bug>  viewBugsByProjectName(String projectName);
 }
