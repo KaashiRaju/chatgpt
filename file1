@@ -1,50 +1,79 @@
-package com.dao;
+package com.entities;
 
-import java.util.List;
+//Provide necessary Annotation
+public class Bug {
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+	// Provide necessary Annotation
 
-import com.entities.Project;
-import com.exception.InvalidProjectException;
-import com.repository.ProjectRepository;
+	private int bugId;
+	private String bugType;
+	private String bugDescription;
+	private String status;
+	private int severity;
+	// Provide necessary Annotations
 
-@Component
-public class ProjectDAOImpl implements IProjectDAO {
+	private Project projectObj;
 
-    // 🔴 MUST use injection
-    @Autowired
-    private ProjectRepository projectRepository;
+	public Bug() {
+		super();
+	}
 
-    @Override
-    public Project addProject(Project project) {
-        return projectRepository.save(project);
-    }
+	public Bug(int bugId, String bugType, String bugDescription, String status, int severity, Project projectObj) {
+		super();
+		this.bugId = bugId;
+		this.bugType = bugType;
+		this.bugDescription = bugDescription;
+		this.status = status;
+		this.severity = severity;
+		this.projectObj = projectObj;
+	}
 
-    @Override
-    public Project viewProjectById(int projectId) throws InvalidProjectException {
+	public int getBugId() {
+		return bugId;
+	}
 
-        return projectRepository.findById(projectId)
-                .orElseThrow(() -> new InvalidProjectException(
-                        "Project with ID " + projectId + " not found"));
-    }
+	public void setBugId(int bugId) {
+		this.bugId = bugId;
+	}
 
-    @Override
-    public List<Project> viewProjectsUnderManagerName(String managerName) {
+	public String getBugType() {
+		return bugType;
+	}
 
-        return projectRepository.findByManagerName(managerName);
-    }
+	public void setBugType(String bugType) {
+		this.bugType = bugType;
+	}
 
-    @Override
-    public List<Project> viewProjectsByDuration(int lowerLimit, int upperLimit) {
+	public String getBugDescription() {
+		return bugDescription;
+	}
 
-        // 🔴 IMPORTANT: method must exist in repository
-        return projectRepository.findByDurationBetween(lowerLimit, upperLimit);
-    }
+	public void setBugDescription(String bugDescription) {
+		this.bugDescription = bugDescription;
+	}
 
-    @Override
-    public List<Project> viewProjectsByClientNameAndLocation(String clientName, String location) {
+	public String getStatus() {
+		return status;
+	}
 
-        return projectRepository.findByClientNameAndLocation(clientName, location);
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(int severity) {
+		this.severity = severity;
+	}
+
+	public Project getProjectObj() {
+		return projectObj;
+	}
+
+	public void setProjectObj(Project projectObj) {
+		this.projectObj = projectObj;
+	}
+
 }
