@@ -1,79 +1,192 @@
-package com.entities;
+Here is the **complete question reconstructed from your images** in clean text form 👇
 
-//Provide necessary Annotation
-public class Bug {
+---
 
-	// Provide necessary Annotation
+# 🐞 Bug Tracking System
 
-	private int bugId;
-	private String bugType;
-	private String bugDescription;
-	private String status;
-	private int severity;
-	// Provide necessary Annotations
+## **1.0 Introduction**
 
-	private Project projectObj;
+The *“Double Check”* is a bug tracking system management service provider, who approaches you to create an application to manage the projects and handling the bugs for various projects from various clients.
 
-	public Bug() {
-		super();
-	}
+Help them to automate the below mentioned requirements by developing a **Spring Data JPA application using Maven**.
 
-	public Bug(int bugId, String bugType, String bugDescription, String status, int severity, Project projectObj) {
-		super();
-		this.bugId = bugId;
-		this.bugType = bugType;
-		this.bugDescription = bugDescription;
-		this.status = status;
-		this.severity = severity;
-		this.projectObj = projectObj;
-	}
+---
 
-	public int getBugId() {
-		return bugId;
-	}
+## **1.1 Functional Requirements**
 
-	public void setBugId(int bugId) {
-		this.bugId = bugId;
-	}
+You need to implement the **Project and Bug module** of the bug tracking application.
 
-	public String getBugType() {
-		return bugType;
-	}
+The client wishes to have methods to:
 
-	public void setBugType(String bugType) {
-		this.bugType = bugType;
-	}
+### ✅ Project Module
 
-	public String getBugDescription() {
-		return bugDescription;
-	}
+* Add a new Project
+* Modify the details of a Project
+* View the Project details based on requirement
 
-	public void setBugDescription(String bugDescription) {
-		this.bugDescription = bugDescription;
-	}
+### ✅ Bug Module
 
-	public String getStatus() {
-		return status;
-	}
+* Add Bug
+* Modify Bug details
+* View Bug details based on requirement
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+---
 
-	public int getSeverity() {
-		return severity;
-	}
+# **2.0 Technical Specifications**
 
-	public void setSeverity(int severity) {
-		this.severity = severity;
-	}
+## **Service Layer**
 
-	public Project getProjectObj() {
-		return projectObj;
-	}
+* Refer to the `IProjectService` interface provided as part of the code skeleton.
 
-	public void setProjectObj(Project projectObj) {
-		this.projectObj = projectObj;
-	}
+* The `ProjectServiceImpl` must implement all methods in `IProjectService`.
 
-}
+* Refer to the `IBugService` interface provided.
+
+* The `BugServiceImpl` must implement all methods in `IBugService`.
+
+---
+
+## **DAO Layer**
+
+* Refer to `IProjectDAO` interface.
+
+* `ProjectDAOImpl` must implement all methods.
+
+* Refer to `IBugDAO` interface.
+
+* `BugDAOImpl` must implement all methods.
+
+* All database operations must be implemented using:
+
+  * `ProjectRepository`
+  * `BugRepository`
+
+---
+
+# **Methods in ProjectDAO**
+
+| Method                                | Description                                                                                                   | Exception                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `addProject`                          | Add project details (projectId, projectName, projectDescription, duration, location, clientName, managerName) | —                                            |
+| `viewProjectById`                     | Retrieve project by projectId                                                                                 | Throw `InvalidProjectException` if not found |
+| `viewProjectsUnderManagerName`        | Retrieve projects by managerName                                                                              | —                                            |
+| `viewProjectsByClientNameAndLocation` | Retrieve projects by clientName and location                                                                  | —                                            |
+| `viewProjectsByDuration`              | Retrieve projects between lowerLimit and upperLimit                                                           | —                                            |
+
+---
+
+# **Methods in BugDAO**
+
+| Method                  | Description                                        | Exception                                            |
+| ----------------------- | -------------------------------------------------- | ---------------------------------------------------- |
+| `addBug`                | Add bug and associate with project using projectId | Throw `InvalidProjectException` if project not found |
+| `updateBugStatus`       | Update bug status using bugId                      | Throw `InvalidBugException` if bug not found         |
+| `viewBugsBySeverity`    | Retrieve bugs by severity                          | —                                                    |
+| `viewBugsByBugType`     | Retrieve bugs by bugType                           | —                                                    |
+| `viewBugsByProjectName` | Retrieve bugs by projectName                       | —                                                    |
+
+---
+
+# **Repository Layer**
+
+Use **Spring Data JPA**.
+
+### ProjectRepository should support:
+
+* Find by managerName
+* Find by clientName and location
+* Find by duration range
+
+### BugRepository should support:
+
+* Find by severity
+* Find by bugType
+* Find by projectName
+
+---
+
+# **Model (Entity Relationship)**
+
+* One **Project** can have multiple **Bugs**
+* One **Bug** belongs to one **Project**
+
+👉 Relationship:
+
+```
+Project (1) --------> (Many) Bug
+```
+
+---
+
+# **3.0 Expected Table Structure**
+
+## **Project Table**
+
+| Field               | Type    |
+| ------------------- | ------- |
+| project_id          | int     |
+| client_name         | varchar |
+| location            | varchar |
+| manager_name        | varchar |
+| project_description | varchar |
+| project_name        | varchar |
+| duration            | int     |
+
+---
+
+## **Bug Table**
+
+| Field           | Type     |
+| --------------- | -------- |
+| bug_id          | int      |
+| bug_description | varchar  |
+| bug_type        | varchar  |
+| severity        | int      |
+| status          | varchar  |
+| project_id      | int (FK) |
+
+👉 `project_id` is the **join column**
+
+---
+
+# **4.0 Process Flow**
+
+1. Client invokes service in main application
+2. Service calls DAO layer
+3. DAO uses Repository
+4. Repository interacts with database
+5. Data returned back through layers
+
+---
+
+# **5.0 Overall Design Constraints**
+
+1. Do NOT change property names in `application.properties`
+2. Use provided dependencies in `pom.xml`
+3. Use only Spring Data JPA (no manual SQL)
+4. Do NOT auto-generate primary keys
+5. Follow given method names exactly
+6. Do NOT modify class/method signatures
+7. Code must compile without errors
+
+---
+
+# ✅ FINAL SUMMARY
+
+You are required to build:
+
+✔ Entities (Project, Bug)
+✔ Repository interfaces
+✔ DAO layer
+✔ Service layer
+✔ Exception classes
+✔ Proper JPA relationships
+
+---
+
+If you want, I can next give you:
+
+👉 **Full final project code (all files combined)**
+👉 **OR mock interview questions based on this**
+
+Just tell 👍
