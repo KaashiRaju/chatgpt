@@ -1,68 +1,21 @@
-package com.dao;
+package com.repository;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.entity.Article;
-import com.entity.Reply;
-import com.exception.InvalidArticleException;
-import com.exception.InvalidReplyException;
-import com.repository.ArticleRepository;
-import com.repository.ReplyRepository;
 
-@Repository   // ✅ Correct annotation
-public class ReplyDAOImpl implements IReplyDAO {
+@Repository   // ✅ Required annotation
+public interface ArticleRepository extends JpaRepository<Article, Integer> {
 
-    @Autowired   // ✅ Inject ReplyRepository
-    private ReplyRepository replyRepository;
+    // ✅ View articles by tag
+    List<Article> findByTag(String tag);
 
-    @Autowired   // ✅ Inject ArticleRepository
-    private ArticleRepository articleRepository;
+    // ✅ View articles with likes >= given value
+    List<Article> findByLikesCountGreaterThanEqual(int likesCount);
 
-    // ✅ Add Reply
-    @Override
-    public Reply addReply(Reply reply, int articleId) throws InvalidArticleException {
-
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new InvalidArticleException("Article not found"));
-
-        reply.setArticle(article);
-        return replyRepository.save(reply);
-    }
-
-    // ✅ Update Visibility
-    @Override
-    public Reply updateVisibility(int replyId, String visibility) throws InvalidReplyException {
-
-        Reply reply = replyRepository.findById(replyId)
-                .orElseThrow(() -> new InvalidReplyException("Reply not found"));
-
-        reply.setVisibility(visibility);
-        return replyRepository.save(reply);
-    }
-
-    // ✅ View Replies by User
-    @Override
-    public List<Reply> viewRepliesByUser(String user) {
-        return replyRepository.findByUser(user);
-    }
-
-    // ✅ View Replies by Article Title
-    @Override
-    public List<Reply> viewRepliesByArticleTitle(String articleTitle) {
-        return replyRepository.findByArticle_ArticleTitle(articleTitle);
-    }
-
-    // ✅ Delete Reply
-    @Override
-    public Reply deleteReply(int replyId) throws InvalidReplyException {
-
-        Reply reply = replyRepository.findById(replyId)
-                .orElseThrow(() -> new InvalidReplyException("Reply not found"));
-
-        replyRepository.delete(reply);
-        return reply;
-    }
+    // ✅ View articles by author and article type
+    List<Article> findByAuthorAndArticleType(String author, String articleType);
 }
