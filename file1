@@ -1,48 +1,68 @@
+package com.dao;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.dao.IArticleDAO;
 import com.entity.Article;
+import com.entity.Reply;
 import com.exception.InvalidArticleException;
+import com.exception.InvalidReplyException;
 import com.repository.ArticleRepository;
+import com.repository.ReplyRepository;
 
-@Repository   // ✅ Required annotation
-public class ArticleDAOImpl implements IArticleDAO {
+@Repository   // ✅ Correct annotation
+public class ReplyDAOImpl implements IReplyDAO {
 
-    @Autowired   // ✅ Inject repository
+    @Autowired   // ✅ Inject ReplyRepository
+    private ReplyRepository replyRepository;
+
+    @Autowired   // ✅ Inject ArticleRepository
     private ArticleRepository articleRepository;
 
-    // ✅ Add Article
+    // ✅ Add Reply
     @Override
-    public Article addArticle(Article article) {
-        return articleRepository.save(article);
-    }
+    public Reply addReply(Reply reply, int articleId) throws InvalidArticleException {
 
-    // ✅ View Article By ID
-    @Override
-    public Article viewArticleById(int articleId) throws InvalidArticleException {
-
-        return articleRepository.findById(articleId)
+        Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new InvalidArticleException("Article not found"));
+
+        reply.setArticle(article);
+        return replyRepository.save(reply);
     }
 
-    // ✅ View Articles By Tag
+    // ✅ Update Visibility
     @Override
-    public List<Article> viewArticlesByTag(String tag) {
-        return articleRepository.findByTag(tag);
+    public Reply updateVisibility(int replyId, String visibility) throws InvalidReplyException {
+
+        Reply reply = replyRepository.findById(replyId)
+                .orElseThrow(() -> new InvalidReplyException("Reply not found"));
+
+        reply.setVisibility(visibility);
+        return replyRepository.save(reply);
     }
 
-    // ✅ View Articles By Likes Count
+    // ✅ View Replies by User
     @Override
-    public List<Article> viewArticlesByLikesCount(int likesCount) {
-        return articleRepository.findByLikesCountGreaterThanEqual(likesCount);
+    public List<Reply> viewRepliesByUser(String user) {
+        return replyRepository.findByUser(user);
     }
 
-    // ✅ View Articles By Author and Article Type
+    // ✅ View Replies by Article Title
     @Override
-    public List<Article> viewArticlesByAuthorAndArticleType(String author, String articleType) {
-        return articleRepository.findByAuthorAndArticleType(author, articleType);
+    public List<Reply> viewRepliesByArticleTitle(String articleTitle) {
+        return replyRepository.findByArticle_ArticleTitle(articleTitle);
+    }
+
+    // ✅ Delete Reply
+    @Override
+    public Reply deleteReply(int replyId) throws InvalidReplyException {
+
+        Reply reply = replyRepository.findById(replyId)
+                .orElseThrow(() -> new InvalidReplyException("Reply not found"));
+
+        replyRepository.delete(reply);
+        return reply;
     }
 }
