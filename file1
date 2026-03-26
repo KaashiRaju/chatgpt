@@ -1,18 +1,47 @@
-package com.repository;
+package com.service;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.entity.Reply;
+import com.dao.IArticleDAO;
+import com.entity.Article;
+import com.exception.InvalidArticleException;
 
-@Repository   // ✅ Required annotation
-public interface ReplyRepository extends JpaRepository<Reply, Integer> {
+@Service   // ✅ Required annotation
+public class ArticleServiceImpl implements IArticleService {
 
-    // ✅ View replies by user
-    List<Reply> findByUser(String user);
+    @Autowired   // ✅ Inject DAO
+    private IArticleDAO articleDAO;
 
-    // ✅ View replies by article title
-    List<Reply> findByArticle_ArticleTitle(String articleTitle);
+    // ✅ Add Article
+    @Override
+    public Article addArticle(Article article) {
+        return articleDAO.addArticle(article);
+    }
+
+    // ✅ View Article by ID
+    @Override
+    public Article viewArticleById(int articleId) throws InvalidArticleException {
+        return articleDAO.viewArticleById(articleId);
+    }
+
+    // ✅ View Articles by Tag
+    @Override
+    public List<Article> viewArticlesByTag(String tag) {
+        return articleDAO.viewArticlesByTag(tag);
+    }
+
+    // ✅ View Articles by Likes Count
+    @Override
+    public List<Article> viewArticlesByLikesCount(int likesCount) {
+        return articleDAO.viewArticlesByLikesCount(likesCount);
+    }
+
+    // ✅ View Articles by Author and Article Type
+    @Override
+    public List<Article> viewArticlesByAuthorAndArticleType(String author, String articleType) {
+        return articleDAO.viewArticlesByAuthorAndArticleType(author, articleType);
+    }
 }
