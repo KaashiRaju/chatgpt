@@ -1,82 +1,16 @@
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] -------------------< com.example.demo:NewsFeedBlog >--------------------
-[INFO] Building NewsFeedBlog 0.0.1-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ NewsFeedBlog ---
-[INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] Copying 0 resource from src/main/resources to target/classes
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ NewsFeedBlog ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 15 source files to /home/p10014/NewsFeedBlog/target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/repository/ReplyRepository.java:[11,8] interface ArticleRepository is public, should be declared in a file named ArticleRepository.java
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[11,8] duplicate class: com.repository.ArticleRepository
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[12,8] class ArticleDAOImpl is public, should be declared in a file named ArticleDAOImpl.java
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[6,2] cannot find symbol
-  symbol: class Entity
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[4,2] cannot find symbol
-  symbol: class Entity
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[10,10] cannot find symbol
-  symbol:   class Id
-  location: class com.entities.Article
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,6] cannot find symbol
-  symbol:   class OneToMany
-  location: class com.entities.Article
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,43] cannot find symbol
-  symbol:   variable CascadeType
-  location: class com.entities.Article
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[8,6] cannot find symbol
-  symbol:   class Id
-  location: class com.entities.Reply
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[15,10] cannot find symbol
-  symbol:   class ManyToOne
-  location: class com.entities.Reply
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[16,10] cannot find symbol
-  symbol:   class JoinColumn
-  location: class com.entities.Reply
-[INFO] 11 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.991 s
-[INFO] Finished at: 2026-03-26T19:44:10+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project NewsFeedBlog: Compilation failure: Compilation failure: 
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/repository/ReplyRepository.java:[11,8] interface ArticleRepository is public, should be declared in a file named ArticleRepository.java
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[11,8] duplicate class: com.repository.ArticleRepository
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[12,8] class ArticleDAOImpl is public, should be declared in a file named ArticleDAOImpl.java
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[6,2] cannot find symbol
-[ERROR]   symbol: class Entity
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[4,2] cannot find symbol
-[ERROR]   symbol: class Entity
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[10,10] cannot find symbol
-[ERROR]   symbol:   class Id
-[ERROR]   location: class com.entities.Article
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,6] cannot find symbol
-[ERROR]   symbol:   class OneToMany
-[ERROR]   location: class com.entities.Article
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,43] cannot find symbol
-[ERROR]   symbol:   variable CascadeType
-[ERROR]   location: class com.entities.Article
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[8,6] cannot find symbol
-[ERROR]   symbol:   class Id
-[ERROR]   location: class com.entities.Reply
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[15,10] cannot find symbol
-[ERROR]   symbol:   class ManyToOne
-[ERROR]   location: class com.entities.Reply
-[ERROR] /home/p10014/NewsFeedBlog/src/main/java/com/entities/Reply.java:[16,10] cannot find symbol
-[ERROR]   symbol:   class JoinColumn
-[ERROR]   location: class com.entities.Reply
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+package com.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.entity.Reply;
+
+@Repository
+public interface ReplyRepository extends JpaRepository<Reply, Integer> {
+
+    List<Reply> findByUser(String user);
+
+    List<Reply> findByArticle_ArticleTitle(String articleTitle);
+}
