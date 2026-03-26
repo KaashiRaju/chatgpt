@@ -1,46 +1,88 @@
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] -------------------< com.example.demo:NewsFeedBlog >--------------------
-[INFO] Building NewsFeedBlog 0.0.1-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ NewsFeedBlog ---
-[INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] Copying 0 resource from src/main/resources to target/classes
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ NewsFeedBlog ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 15 source files to /home/p10009/NewsFeedBlog/target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,43] cannot find symbol
-  symbol:   variable CascadeType
-  location: class com.entities.Article
-[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,54] an enum annotation value must be an enum constant
-[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[31,14] cannot find symbol
-  symbol:   method setArticle(com.entities.Article)
-  location: variable reply of type com.entities.Reply
-[INFO] 3 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.211 s
-[INFO] Finished at: 2026-03-26T20:05:33+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project NewsFeedBlog: Compilation failure: Compilation failure: 
-[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,43] cannot find symbol
-[ERROR]   symbol:   variable CascadeType
-[ERROR]   location: class com.entities.Article
-[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,54] an enum annotation value must be an enum constant
-[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[31,14] cannot find symbol
-[ERROR]   symbol:   method setArticle(com.entities.Article)
-[ERROR]   location: variable reply of type com.entities.Reply
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+package com.entities;
+
+//Provide necessary Annotation
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn; // Often used with ManyToOne
+
+@Entity
+public class Reply {
+
+	// Provide necessary Annotation
+    @Id
+	private int replyId;
+	private String user;
+	private String replyContent;
+	private String replyType;
+	private String visibility;
+	// Provide necessary Annotations
+	@ManyToOne
+	@JoinColumn(name="article_id")
+	private Article articleObj;
+
+	public Reply() {
+		super();
+	}
+
+	public Reply(int replyId, String user, String replyContent, String replyType, String visibility,
+			Article articleObj) {
+		super();
+		this.replyId = replyId;
+		this.user = user;
+		this.replyContent = replyContent;
+		this.replyType = replyType;
+		this.visibility = visibility;
+		this.articleObj = articleObj;
+	}
+
+	public int getReplyId() {
+		return replyId;
+	}
+
+	public void setReplyId(int replyId) {
+		this.replyId = replyId;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getReplyContent() {
+		return replyContent;
+	}
+
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
+
+	public String getReplyType() {
+		return replyType;
+	}
+
+	public void setReplyType(String replyType) {
+		this.replyType = replyType;
+	}
+
+	public String getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(String visibility) {
+		this.visibility = visibility;
+	}
+
+	public Article getArticleObj() {
+		return articleObj;
+	}
+
+	public void setArticleObj(Article articleObj) {
+		this.articleObj = articleObj;
+	}
+	
+
+}
