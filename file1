@@ -5,17 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.entity.Article;
+import com.entity.Reply;
 
 @Repository   // ✅ Required annotation
-public interface ArticleRepository extends JpaRepository<Article, Integer> {
+public interface ReplyRepository extends JpaRepository<Reply, Integer> {
 
-    // ✅ View articles by tag
-    List<Article> findByTag(String tag);
+    // ✅ View replies by user
+    List<Reply> findByUser(String user);
 
-    // ✅ View articles with likes >= given value
-    List<Article> findByLikesCountGreaterThanEqual(int likesCount);
-
-    // ✅ View articles by author and article type
-    List<Article> findByAuthorAndArticleType(String author, String articleType);
+    // ✅ View replies by article title
+    List<Reply> findByArticle_ArticleTitle(String articleTitle);
 }
