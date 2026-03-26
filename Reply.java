@@ -17,18 +17,18 @@ public class Reply {
 
     @ManyToOne
     @JoinColumn(name = "article_id")
-    private Article article;
+    private Article articleObj;   // ✅ KEEP THIS NAME
 
     public Reply() {}
 
     public Reply(int replyId, String user, String replyContent,
-                 String replyType, String visibility, Article article) {
+                 String replyType, String visibility, Article articleObj) {
         this.replyId = replyId;
         this.user = user;
         this.replyContent = replyContent;
         this.replyType = replyType;
         this.visibility = visibility;
-        this.article = article;
+        this.articleObj = articleObj;
     }
 
     public int getReplyId() { return replyId; }
@@ -46,6 +46,6 @@ public class Reply {
     public String getVisibility() { return visibility; }
     public void setVisibility(String visibility) { this.visibility = visibility; }
 
-    public Article getArticle() { return article; }
-    public void setArticle(Article article) { this.article = article; }
+    public Article getArticleObj() { return articleObj; }
+    public void setArticleObj(Article articleObj) { this.articleObj = articleObj; }
 }
