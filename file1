@@ -1,48 +1,177 @@
-package com.service;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.dao.IReplyDAO;
-import com.entity.Reply;
-import com.exception.InvalidArticleException;
-import com.exception.InvalidReplyException;
-
-@Service   // ✅ Required annotation
-public class ReplyServiceImpl implements IReplyService {
-
-    @Autowired   // ✅ Inject DAO
-    private IReplyDAO replyDAO;
-
-    // ✅ Add Reply
-    @Override
-    public Reply addReply(Reply reply, int articleId) throws InvalidArticleException {
-        return replyDAO.addReply(reply, articleId);
-    }
-
-    // ✅ Update Visibility
-    @Override
-    public Reply updateVisibility(int replyId, String visibility) throws InvalidReplyException {
-        return replyDAO.updateVisibility(replyId, visibility);
-    }
-
-    // ✅ View Replies by User
-    @Override
-    public List<Reply> viewRepliesByUser(String user) {
-        return replyDAO.viewRepliesByUser(user);
-    }
-
-    // ✅ View Replies by Article Title
-    @Override
-    public List<Reply> viewRepliesByArticleTitle(String articleTitle) {
-        return replyDAO.viewRepliesByArticleTitle(articleTitle);
-    }
-
-    // ✅ Delete Reply
-    @Override
-    public Reply deleteReply(int replyId) throws InvalidReplyException {
-        return replyDAO.deleteReply(replyId);
-    }
-}
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[12,8] class ArticleDAOImpl is public, should be declared in a file named ArticleDAOImpl.java
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ReplyRepository.java:[11,8] interface ArticleRepository is public, should be declared in a file named ArticleRepository.java
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ReplyServiceImpl.java:[13,8] class ArticleServiceImpl is public, should be declared in a file named ArticleServiceImpl.java
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ArticleDAOImpl.java:[12,8] duplicate class: ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[9,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[20,31] cannot find symbol
+  symbol:   class Article
+  location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[20,12] cannot find symbol
+  symbol:   class Article
+  location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[26,12] cannot find symbol
+  symbol:   class Article
+  location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[32,17] cannot find symbol
+  symbol:   class Article
+  location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[38,17] cannot find symbol
+  symbol:   class Article
+  location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[44,17] cannot find symbol
+  symbol:   class Article
+  location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[6,2] cannot find symbol
+  symbol: class Entity
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[4,2] cannot find symbol
+  symbol: class Entity
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[7,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[8,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[11,58] cannot find symbol
+  symbol: class Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[19,31] cannot find symbol
+  symbol:   class Article
+  location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[19,12] cannot find symbol
+  symbol:   class Article
+  location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[25,12] cannot find symbol
+  symbol:   class Article
+  location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[33,17] cannot find symbol
+  symbol:   class Article
+  location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[39,17] cannot find symbol
+  symbol:   class Article
+  location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[45,17] cannot find symbol
+  symbol:   class Article
+  location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[14,10] cannot find symbol
+  symbol:   class Article
+  location: interface com.repository.ArticleRepository
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[17,10] cannot find symbol
+  symbol:   class Article
+  location: interface com.repository.ArticleRepository
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[20,10] cannot find symbol
+  symbol:   class Article
+  location: interface com.repository.ArticleRepository
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ReplyRepository.java:[8,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ReplyServiceImpl.java:[9,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ArticleDAOImpl.java:[7,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[10,10] cannot find symbol
+  symbol:   class Id
+  location: class com.entities.Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,6] cannot find symbol
+  symbol:   class OneToMany
+  location: class com.entities.Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,43] cannot find symbol
+  symbol:   variable CascadeType
+  location: class com.entities.Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[8,6] cannot find symbol
+  symbol:   class Id
+  location: class com.entities.Reply
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[15,10] cannot find symbol
+  symbol:   class ManyToOne
+  location: class com.entities.Reply
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[16,10] cannot find symbol
+  symbol:   class JoinColumn
+  location: class com.entities.Reply
+[INFO] 34 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.316 s
+[INFO] Finished at: 2026-03-26T19:35:15+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project NewsFeedBlog: Compilation failure: Compilation failure: 
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[12,8] class ArticleDAOImpl is public, should be declared in a file named ArticleDAOImpl.java
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ReplyRepository.java:[11,8] interface ArticleRepository is public, should be declared in a file named ArticleRepository.java
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ReplyServiceImpl.java:[13,8] class ArticleServiceImpl is public, should be declared in a file named ArticleServiceImpl.java
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ArticleDAOImpl.java:[12,8] duplicate class: ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[9,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[20,31] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[20,12] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[26,12] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[32,17] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[38,17] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ArticleServiceImpl.java:[44,17] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class com.service.ArticleServiceImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[6,2] cannot find symbol
+[ERROR]   symbol: class Entity
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[4,2] cannot find symbol
+[ERROR]   symbol: class Entity
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[7,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[8,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[11,58] cannot find symbol
+[ERROR]   symbol: class Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[19,31] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[19,12] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[25,12] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[33,17] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[39,17] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[45,17] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: class ArticleDAOImpl
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[14,10] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: interface com.repository.ArticleRepository
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[17,10] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: interface com.repository.ArticleRepository
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ArticleRepository.java:[20,10] cannot find symbol
+[ERROR]   symbol:   class Article
+[ERROR]   location: interface com.repository.ArticleRepository
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/repository/ReplyRepository.java:[8,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/service/ReplyServiceImpl.java:[9,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/dao/ArticleDAOImpl.java:[7,18] package com.entity does not exist
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[10,10] cannot find symbol
+[ERROR]   symbol:   class Id
+[ERROR]   location: class com.entities.Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,6] cannot find symbol
+[ERROR]   symbol:   class OneToMany
+[ERROR]   location: class com.entities.Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Article.java:[20,43] cannot find symbol
+[ERROR]   symbol:   variable CascadeType
+[ERROR]   location: class com.entities.Article
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[8,6] cannot find symbol
+[ERROR]   symbol:   class Id
+[ERROR]   location: class com.entities.Reply
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[15,10] cannot find symbol
+[ERROR]   symbol:   class ManyToOne
+[ERROR]   location: class com.entities.Reply
+[ERROR] /home/p10003/NewsFeedBlog/src/main/java/com/entities/Reply.java:[16,10] cannot find symbol
+[ERROR]   symbol:   class JoinColumn
+[ERROR]   location: class com.entities.Reply
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
