@@ -1,88 +1,51 @@
-package com.entities;
+package com.entity;   // 🔥 IMPORTANT (change from com.entities)
 
-//Provide necessary Annotation
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn; // Often used with ManyToOne
+import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Reply {
 
-	// Provide necessary Annotation
     @Id
-	private int replyId;
-	private String user;
-	private String replyContent;
-	private String replyType;
-	private String visibility;
-	// Provide necessary Annotations
-	@ManyToOne
-	@JoinColumn(name="article_id")
-	private Article articleObj;
+    private int replyId;
+    private String user;
+    private String replyContent;
+    private String replyType;
+    private String visibility;
 
-	public Reply() {
-		super();
-	}
+    @ManyToOne
+    @JoinColumn(name="article_id")
+    private Article article;   // ✅ FIXED
 
-	public Reply(int replyId, String user, String replyContent, String replyType, String visibility,
-			Article articleObj) {
-		super();
-		this.replyId = replyId;
-		this.user = user;
-		this.replyContent = replyContent;
-		this.replyType = replyType;
-		this.visibility = visibility;
-		this.articleObj = articleObj;
-	}
+    public Reply() {}
 
-	public int getReplyId() {
-		return replyId;
-	}
+    public Reply(int replyId, String user, String replyContent, String replyType,
+                 String visibility, Article article) {
+        this.replyId = replyId;
+        this.user = user;
+        this.replyContent = replyContent;
+        this.replyType = replyType;
+        this.visibility = visibility;
+        this.article = article;
+    }
 
-	public void setReplyId(int replyId) {
-		this.replyId = replyId;
-	}
+    public int getReplyId() { return replyId; }
+    public void setReplyId(int replyId) { this.replyId = replyId; }
 
-	public String getUser() {
-		return user;
-	}
+    public String getUser() { return user; }
+    public void setUser(String user) { this.user = user; }
 
-	public void setUser(String user) {
-		this.user = user;
-	}
+    public String getReplyContent() { return replyContent; }
+    public void setReplyContent(String replyContent) { this.replyContent = replyContent; }
 
-	public String getReplyContent() {
-		return replyContent;
-	}
+    public String getReplyType() { return replyType; }
+    public void setReplyType(String replyType) { this.replyType = replyType; }
 
-	public void setReplyContent(String replyContent) {
-		this.replyContent = replyContent;
-	}
+    public String getVisibility() { return visibility; }
+    public void setVisibility(String visibility) { this.visibility = visibility; }
 
-	public String getReplyType() {
-		return replyType;
-	}
-
-	public void setReplyType(String replyType) {
-		this.replyType = replyType;
-	}
-
-	public String getVisibility() {
-		return visibility;
-	}
-
-	public void setVisibility(String visibility) {
-		this.visibility = visibility;
-	}
-
-	public Article getArticleObj() {
-		return articleObj;
-	}
-
-	public void setArticleObj(Article articleObj) {
-		this.articleObj = articleObj;
-	}
-	
-
+    public Article getArticle() { return article; }           // ✅ FIXED
+    public void setArticle(Article article) { this.article = article; } // ✅ FIXED
 }
