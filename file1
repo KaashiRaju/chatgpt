@@ -1,68 +1,46 @@
-package com.dao;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import com.entity.Article;
-import com.entity.Reply;
-import com.exception.InvalidArticleException;
-import com.exception.InvalidReplyException;
-import com.repository.ArticleRepository;
-import com.repository.ReplyRepository;
-
-@Repository   // ✅ DAO annotation
-public class ReplyDAOImpl implements IReplyDAO {
-
-    @Autowired   // ✅ Inject ReplyRepository
-    private ReplyRepository replyRepository;
-
-    @Autowired   // ✅ Inject ArticleRepository
-    private ArticleRepository articleRepository;
-
-    // ✅ Add Reply
-    @Override
-    public Reply addReply(Reply reply, int articleId) throws InvalidArticleException {
-
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new InvalidArticleException("Article not found"));
-
-        reply.setArticle(article);
-        return replyRepository.save(reply);
-    }
-
-    // ✅ Update Visibility
-    @Override
-    public Reply updateVisibility(int replyId, String visibility) throws InvalidReplyException {
-
-        Reply reply = replyRepository.findById(replyId)
-                .orElseThrow(() -> new InvalidReplyException("Reply not found"));
-
-        reply.setVisibility(visibility);
-        return replyRepository.save(reply);
-    }
-
-    // ✅ View Replies by Article Title
-    @Override
-    public List<Reply> viewRepliesByArticleTitle(String articleTitle) {
-        return replyRepository.findByArticle_ArticleTitle(articleTitle);
-    }
-
-    // ✅ View Replies by User
-    @Override
-    public List<Reply> viewRepliesByUser(String user) {
-        return replyRepository.findByUser(user);
-    }
-
-    // ✅ Delete Reply
-    @Override
-    public Reply deleteReply(int replyId) throws InvalidReplyException {
-
-        Reply reply = replyRepository.findById(replyId)
-                .orElseThrow(() -> new InvalidReplyException("Reply not found"));
-
-        replyRepository.delete(reply);
-        return reply;
-    }
-}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.example.demo:NewsFeedBlog >--------------------
+[INFO] Building NewsFeedBlog 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ NewsFeedBlog ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ NewsFeedBlog ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 15 source files to /home/p10009/NewsFeedBlog/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,43] cannot find symbol
+  symbol:   variable CascadeType
+  location: class com.entities.Article
+[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,54] an enum annotation value must be an enum constant
+[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[31,14] cannot find symbol
+  symbol:   method setArticle(com.entities.Article)
+  location: variable reply of type com.entities.Reply
+[INFO] 3 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.211 s
+[INFO] Finished at: 2026-03-26T20:05:33+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project NewsFeedBlog: Compilation failure: Compilation failure: 
+[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,43] cannot find symbol
+[ERROR]   symbol:   variable CascadeType
+[ERROR]   location: class com.entities.Article
+[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/entities/Article.java:[24,54] an enum annotation value must be an enum constant
+[ERROR] /home/p10009/NewsFeedBlog/src/main/java/com/dao/ReplyDAOImpl.java:[31,14] cannot find symbol
+[ERROR]   symbol:   method setArticle(com.entities.Article)
+[ERROR]   location: variable reply of type com.entities.Reply
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
