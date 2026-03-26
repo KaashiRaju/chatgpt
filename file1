@@ -5,43 +5,44 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dao.IArticleDAO;
-import com.entity.Article;
+import com.dao.IReplyDAO;
+import com.entity.Reply;
 import com.exception.InvalidArticleException;
+import com.exception.InvalidReplyException;
 
 @Service   // ✅ Required annotation
-public class ArticleServiceImpl implements IArticleService {
+public class ReplyServiceImpl implements IReplyService {
 
     @Autowired   // ✅ Inject DAO
-    private IArticleDAO articleDAO;
+    private IReplyDAO replyDAO;
 
-    // ✅ Add Article
+    // ✅ Add Reply
     @Override
-    public Article addArticle(Article article) {
-        return articleDAO.addArticle(article);
+    public Reply addReply(Reply reply, int articleId) throws InvalidArticleException {
+        return replyDAO.addReply(reply, articleId);
     }
 
-    // ✅ View Article by ID
+    // ✅ Update Visibility
     @Override
-    public Article viewArticleById(int articleId) throws InvalidArticleException {
-        return articleDAO.viewArticleById(articleId);
+    public Reply updateVisibility(int replyId, String visibility) throws InvalidReplyException {
+        return replyDAO.updateVisibility(replyId, visibility);
     }
 
-    // ✅ View Articles by Tag
+    // ✅ View Replies by User
     @Override
-    public List<Article> viewArticlesByTag(String tag) {
-        return articleDAO.viewArticlesByTag(tag);
+    public List<Reply> viewRepliesByUser(String user) {
+        return replyDAO.viewRepliesByUser(user);
     }
 
-    // ✅ View Articles by Likes Count
+    // ✅ View Replies by Article Title
     @Override
-    public List<Article> viewArticlesByLikesCount(int likesCount) {
-        return articleDAO.viewArticlesByLikesCount(likesCount);
+    public List<Reply> viewRepliesByArticleTitle(String articleTitle) {
+        return replyDAO.viewRepliesByArticleTitle(articleTitle);
     }
 
-    // ✅ View Articles by Author and Article Type
+    // ✅ Delete Reply
     @Override
-    public List<Article> viewArticlesByAuthorAndArticleType(String author, String articleType) {
-        return articleDAO.viewArticlesByAuthorAndArticleType(author, articleType);
+    public Reply deleteReply(int replyId) throws InvalidReplyException {
+        return replyDAO.deleteReply(replyId);
     }
 }
